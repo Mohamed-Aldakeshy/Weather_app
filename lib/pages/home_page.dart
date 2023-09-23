@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_try/material_color_method.dart';
 import 'package:weather_try/models/weather_model.dart';
 import 'package:weather_try/pages/search_page.dart';
 import 'package:weather_try/providers/weather_provider.dart';
@@ -56,53 +57,66 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(
-                    flex: 3,
-                  ),
-                  Text(
-                    Provider.of<weatherProvider>(context).cityName!,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    getThemeColor(weatherData!.weatherStateName)[50]!,
+                    getThemeColor(weatherData!.weatherStateName)[900]!
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(
+                      flex: 3,
                     ),
-                  ),
-                  Text(
-                    weatherData!.time,
-                    style: TextStyle(fontSize: 22),
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image.network('https:${weatherData!.icon}'),
-                      Text(
-                        '${weatherData!.temp.toInt()}',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
+                    Text(
+                      Provider.of<weatherProvider>(context).cityName!,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Column(
-                        children: [
-                          Text('maxTemp :${weatherData!.maxTemp.toInt()}'),
-                          Text('minTemp :${weatherData!.minTemp.toInt()}'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Text(
-                    weatherData!.weatherStateName,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  Spacer(
-                    flex: 6,
-                  ),
-                ],
+                    Text(
+                      weatherData!.time,
+                      style: TextStyle(fontSize: 22),
+                    ),
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.network('https:${weatherData!.icon}'),
+                        Text(
+                          '${weatherData!.temp.toInt()}',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Column(
+                          children: [
+                            Text('maxTemp :${weatherData!.maxTemp.toInt()}'),
+                            Text('minTemp :${weatherData!.minTemp.toInt()}'),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(
+                      weatherData!.weatherStateName,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Spacer(
+                      flex: 6,
+                    ),
+                  ],
+                ),
               ),
             ),
     );
